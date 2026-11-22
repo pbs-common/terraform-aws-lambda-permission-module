@@ -18,6 +18,12 @@ More information can be found on these install methods and more in [the document
 
 Grants a Lambda function to be invoked by a specific service.
 
+The module refuses grants that would let an unintended caller invoke the function; the `principal` and `source_account` validations hold the rules:
+
+- `principal` must not contain a wildcard, so the module cannot grant public invoke access (Security Hub Lambda.1).
+- A service principal (`*.amazonaws.com`) must name the account that owns its source, through `source_account` or a `source_arn` with an account ID in it. An S3 bucket ARN has no account ID, so an S3 grant also needs `source_account`. See [the confused deputy problem](https://docs.aws.amazon.com/IAM/latest/UserGuide/confused-deputy.html).
+- The module never sets `function_url_auth_type`, so it cannot grant `NONE` (a public function URL).
+
 Integrate this module like so:
 
 ```hcl
