@@ -1,0 +1,990 @@
+{
+  "SPDXID": "SPDXRef-DOCUMENT",
+  "creationInfo": {
+    "comment": "Hash input, exactly.\ndocumentNamespace = https://spdx.org/spdxdocs/<org>/<repo>/<identity>\nidentity = _projection(doc, drop_created=False)\nindex (finds a recurrence) = _projection(doc, drop_created=True)\ncreated is resolved first, then hashed.\n\ndef _projection(doc, drop_created):\n    d = {k: v for k, v in doc.items() if k != \"documentNamespace\"}\n    if drop_created:      # the INDEX drops it; the IDENTITY never does\n        d[\"creationInfo\"] = {k: v for k, v in d[\"creationInfo\"].items() if k != \"created\"}\n    d[\"packages\"]      = sorted(doc.get(\"packages\", []),\n                                key=lambda p: (p.get(\"SPDXID\",\"\"), p.get(\"name\",\"\")))\n    d[\"relationships\"] = sorted(doc.get(\"relationships\", []),\n                                key=lambda r: (r.get(\"spdxElementId\",\"\"),\n                                               r.get(\"relationshipType\",\"\"),\n                                               r.get(\"relatedSpdxElement\",\"\")))\n    blob = json.dumps(d, separators=(\",\", \":\"), sort_keys=True, ensure_ascii=False)\n    return hashlib.sha256(blob.encode(\"utf-8\")).hexdigest()\n\nSource: gh api repos/<org>/<repo>/dependency-graph/sbom --jq .sbom",
+    "created": "2026-11-22T15:30:11Z",
+    "creators": [
+      "Tool: protobom-v0.0.0-20261117223245-72f62ebd2215+dirty",
+      "Tool: GitHub.com-Dependency-Graph",
+      "Tool: dependabot"
+    ]
+  },
+  "dataLicense": "CC0-1.0",
+  "documentNamespace": "https://spdx.org/spdxdocs/pbs-common/terraform-aws-lambda-permission-module/6ae2dcad3ecf1a3049f1ff81e354b6475ab9b6c24c808508e1f82c84862dc8bc",
+  "name": "com.github.pbs-common/terraform-aws-lambda-permission-module",
+  "packages": [
+    {
+      "SPDXID": "SPDXRef-github-pbs-common-terraform-aws-lambda-permission-module-main-ed1550",
+      "downloadLocation": "git+https://github.com/pbs-common/terraform-aws-lambda-permission-module",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:github/pbs-common/terraform-aws-lambda-permission-module@main",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseDeclared": "MIT",
+      "name": "com.github.pbs-common/terraform-aws-lambda-permission-module",
+      "versionInfo": "main"
+    },
+    {
+      "SPDXID": "SPDXRef-githubactions-actions-checkout-main-014c9c",
+      "downloadLocation": "NOASSERTION",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:githubactions/actions/checkout@main",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "name": "actions/checkout",
+      "versionInfo": "main"
+    },
+    {
+      "SPDXID": "SPDXRef-githubactions-dependabot-fetch-metadata-3..-5fcaf7",
+      "downloadLocation": "NOASSERTION",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:githubactions/dependabot/fetch-metadata@3.%2A.%2A",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "name": "dependabot/fetch-metadata",
+      "versionInfo": "3.*.*"
+    },
+    {
+      "SPDXID": "SPDXRef-githubactions-jdx-mise-action-5.2.4-8bff78",
+      "downloadLocation": "NOASSERTION",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:githubactions/jdx/mise-action@5.2.4",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "name": "jdx/mise-action",
+      "versionInfo": "5.2.4"
+    },
+    {
+      "SPDXID": "SPDXRef-golang-github.comagext-levenshtein-v1.2.3-d1a7b2",
+      "copyrightText": "Copyright (c) 2004, 2006 The Linux Foundation and its contributors, Copyright 2016 ALRUX Inc.",
+      "downloadLocation": "NOASSERTION",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:golang/github.com/agext/levenshtein@v1.2.3",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "Apache-2.0",
+      "name": "github.com/agext/levenshtein",
+      "versionInfo": "v1.2.3"
+    },
+    {
+      "SPDXID": "SPDXRef-golang-github.comapparentlymartgo-textseg-v15-v15.0.0-d3006a",
+      "copyrightText": "Copyright (c) 1991-2017 Unicode, Inc., Copyright (c) 2014 Couchbase, Inc., Copyright (c) 2017 Martin Atkins",
+      "downloadLocation": "NOASSERTION",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:golang/github.com/apparentlymart/go-textseg/v15@v15.0.0",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "MIT",
+      "name": "github.com/apparentlymart/go-textseg/v15",
+      "versionInfo": "v15.0.0"
+    },
+    {
+      "SPDXID": "SPDXRef-golang-github.combgentry-go-netrc-v0.0.0-20140422174119-9fd32a8b3d3d-3851a6",
+      "copyrightText": "Copyright (c) 2010 Fazlul Shahriar <fshahriar@gmail.com>, Copyright (c) 2010 Fazlul Shahriar <fshahriar@gmail.com> . Newer, Copyright (c) 2014 Blake Gentry <blakesgentry@gmail.com>, portions Copyright (c) 2014 Blake Gentry <blakesgentry@gmail.com>",
+      "downloadLocation": "NOASSERTION",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:golang/github.com/bgentry/go-netrc@v0.0.0-20140422174119-9fd32a8b3d3d",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "MIT",
+      "name": "github.com/bgentry/go-netrc",
+      "versionInfo": "v0.0.0-20140422174119-9fd32a8b3d3d"
+    },
+    {
+      "SPDXID": "SPDXRef-golang-github.comdavecgh-go-spew-v1.1.2-0.20180830191138-d8f796af33cc-bbe3b3",
+      "copyrightText": "Copyright (c) 2012-2016 Dave Collins <dave@davec.name>, Copyright (c) 2013 Dave Collins <dave@davec.name>, Copyright (c) 2013-2016 Dave Collins <dave@davec.name>, Copyright (c) 2015-2016 Dave Collins <dave@davec.name>",
+      "downloadLocation": "NOASSERTION",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:golang/github.com/davecgh/go-spew@v1.1.2-0.20180830191138-d8f796af33cc",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "ISC",
+      "name": "github.com/davecgh/go-spew",
+      "versionInfo": "v1.1.2-0.20180830191138-d8f796af33cc"
+    },
+    {
+      "SPDXID": "SPDXRef-golang-github.comgruntwork-io-terratest-v1.0.1-3eb16b",
+      "copyrightText": "(c) jQuery Foundation, Copyright (c) 2010 Cowboy Ben Alman, Copyright (c) 2018 Bryan Braun, Copyright (c) 2025 Gruntwork, Inc., Copyright 2011-2016 Twitter, Inc., Copyright 2018 Gruntwork, Inc.",
+      "downloadLocation": "NOASSERTION",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:golang/github.com/gruntwork-io/terratest@v1.0.1",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "Apache-2.0",
+      "name": "github.com/gruntwork-io/terratest",
+      "versionInfo": "v1.0.1"
+    },
+    {
+      "SPDXID": "SPDXRef-golang-github.comhashicorp-errwrap-v1.1.0-ed4ce8",
+      "downloadLocation": "NOASSERTION",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:golang/github.com/hashicorp/errwrap@v1.1.0",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "MPL-2.0",
+      "name": "github.com/hashicorp/errwrap",
+      "versionInfo": "v1.1.0"
+    },
+    {
+      "SPDXID": "SPDXRef-golang-github.comhashicorp-go-cleanhttp-v0.5.2-2a46b7",
+      "downloadLocation": "NOASSERTION",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:golang/github.com/hashicorp/go-cleanhttp@v0.5.2",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "MPL-2.0",
+      "name": "github.com/hashicorp/go-cleanhttp",
+      "versionInfo": "v0.5.2"
+    },
+    {
+      "SPDXID": "SPDXRef-golang-github.comhashicorp-go-multierror-v1.1.1-ebac25",
+      "downloadLocation": "NOASSERTION",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:golang/github.com/hashicorp/go-multierror@v1.1.1",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "MPL-2.0",
+      "name": "github.com/hashicorp/go-multierror",
+      "versionInfo": "v1.1.1"
+    },
+    {
+      "SPDXID": "SPDXRef-golang-github.comhashicorp-go-safetemp-v1.0.0-c95dc3",
+      "downloadLocation": "NOASSERTION",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:golang/github.com/hashicorp/go-safetemp@v1.0.0",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "MPL-2.0",
+      "name": "github.com/hashicorp/go-safetemp",
+      "versionInfo": "v1.0.0"
+    },
+    {
+      "SPDXID": "SPDXRef-golang-github.comhashicorp-go-version-v1.7.0-515ace",
+      "copyrightText": "Copyright (c) 2014 HashiCorp, Inc., Copyright (c) HashiCorp, Inc.",
+      "downloadLocation": "NOASSERTION",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:golang/github.com/hashicorp/go-version@v1.7.0",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "MPL-2.0",
+      "name": "github.com/hashicorp/go-version",
+      "versionInfo": "v1.7.0"
+    },
+    {
+      "SPDXID": "SPDXRef-golang-github.comhashicorp-terraform-json-v0.27.2-7fe0a1",
+      "copyrightText": "Copyright (c) 2019 HashiCorp, Inc., Copyright (c) HashiCorp, Inc.",
+      "downloadLocation": "NOASSERTION",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:golang/github.com/hashicorp/terraform-json@v0.27.2",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "MPL-2.0",
+      "name": "github.com/hashicorp/terraform-json",
+      "versionInfo": "v0.27.2"
+    },
+    {
+      "SPDXID": "SPDXRef-golang-github.comhashicorpgo-getter-v2-v2.2.3-0e5810",
+      "downloadLocation": "NOASSERTION",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:golang/github.com/hashicorp/go-getter/v2@v2.2.3",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "MPL-2.0",
+      "name": "github.com/hashicorp/go-getter/v2",
+      "versionInfo": "v2.2.3"
+    },
+    {
+      "SPDXID": "SPDXRef-golang-github.comhashicorphcl-v2-v2.24.0-672798",
+      "copyrightText": "Copyright (c) 2014 HashiCorp, Inc., Copyright (c) HashiCorp, Inc., copyright 2018, HashiCorp, Copyright 2021 Google Inc.",
+      "downloadLocation": "NOASSERTION",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:golang/github.com/hashicorp/hcl/v2@v2.24.0",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "MPL-2.0",
+      "name": "github.com/hashicorp/hcl/v2",
+      "versionInfo": "v2.24.0"
+    },
+    {
+      "SPDXID": "SPDXRef-golang-github.comjinzhu-copier-v0.4.0-cfe474",
+      "copyrightText": "Copyright (c) 2015 Jinzhu",
+      "downloadLocation": "NOASSERTION",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:golang/github.com/jinzhu/copier@v0.4.0",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "MIT",
+      "name": "github.com/jinzhu/copier",
+      "versionInfo": "v0.4.0"
+    },
+    {
+      "SPDXID": "SPDXRef-golang-github.comklauspost-compress-v1.20.2-4fbfb2",
+      "downloadLocation": "NOASSERTION",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:golang/github.com/klauspost/compress@v1.20.2",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "BSD-3-Clause AND Apache-2.0 AND MIT",
+      "name": "github.com/klauspost/compress",
+      "versionInfo": "v1.20.2"
+    },
+    {
+      "SPDXID": "SPDXRef-golang-github.commattn-go-zglob-v0.0.6-63c59e",
+      "copyrightText": "Copyright (c) 2017 Yasuhiro Matsumoto, Copyright 2016 The Go Authors",
+      "downloadLocation": "NOASSERTION",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:golang/github.com/mattn/go-zglob@v0.0.6",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "MIT",
+      "name": "github.com/mattn/go-zglob",
+      "versionInfo": "v0.0.6"
+    },
+    {
+      "SPDXID": "SPDXRef-golang-github.commitchellh-go-homedir-v1.1.0-529d8e",
+      "copyrightText": "Copyright (c) 2013 Mitchell Hashimoto",
+      "downloadLocation": "NOASSERTION",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:golang/github.com/mitchellh/go-homedir@v1.1.0",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "MIT",
+      "name": "github.com/mitchellh/go-homedir",
+      "versionInfo": "v1.1.0"
+    },
+    {
+      "SPDXID": "SPDXRef-golang-github.commitchellh-go-testing-interface-v1.14.1-046cb5",
+      "copyrightText": "Copyright (c) 2016 Mitchell Hashimoto",
+      "downloadLocation": "NOASSERTION",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:golang/github.com/mitchellh/go-testing-interface@v1.14.1",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "MIT",
+      "name": "github.com/mitchellh/go-testing-interface",
+      "versionInfo": "v1.14.1"
+    },
+    {
+      "SPDXID": "SPDXRef-golang-github.commitchellh-go-wordwrap-v1.0.1-9e286a",
+      "copyrightText": "Copyright (c) 2014 Mitchell Hashimoto",
+      "downloadLocation": "NOASSERTION",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:golang/github.com/mitchellh/go-wordwrap@v1.0.1",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "MIT",
+      "name": "github.com/mitchellh/go-wordwrap",
+      "versionInfo": "v1.0.1"
+    },
+    {
+      "SPDXID": "SPDXRef-golang-github.compmezard-go-difflib-v1.0.1-0.20181226105442-5d4384ee4fb2-0454e9",
+      "copyrightText": "Copyright (c) 2013, Patrick Mezard",
+      "downloadLocation": "NOASSERTION",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:golang/github.com/pmezard/go-difflib@v1.0.1-0.20181226105442-5d4384ee4fb2",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "BSD-3-Clause",
+      "name": "github.com/pmezard/go-difflib",
+      "versionInfo": "v1.0.1-0.20181226105442-5d4384ee4fb2"
+    },
+    {
+      "SPDXID": "SPDXRef-golang-github.comstretchr-testify-v1.11.1-0501a2",
+      "copyrightText": "Copyright (c) 2012-2020 Mat Ryer, Tyler Bunnell and contributors",
+      "downloadLocation": "NOASSERTION",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:golang/github.com/stretchr/testify@v1.11.1",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "MIT",
+      "name": "github.com/stretchr/testify",
+      "versionInfo": "v1.11.1"
+    },
+    {
+      "SPDXID": "SPDXRef-golang-github.comtmccombs-hcl2json-v0.6.8-d2b188",
+      "downloadLocation": "NOASSERTION",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:golang/github.com/tmccombs/hcl2json@v0.6.8",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "Apache-2.0",
+      "name": "github.com/tmccombs/hcl2json",
+      "versionInfo": "v0.6.8"
+    },
+    {
+      "SPDXID": "SPDXRef-golang-github.comulikunitz-xz-v0.5.15-caee38",
+      "copyrightText": "Copyright (c) 2009 The Go Authors, Copyright (c) 2014-2022 Ulrich Kunitz, Copyright 2014-2022 Ulrich Kunitz, Copyright 2014-2025 Ulrich Kunitz, copyright on a GUI. The Apple Computer, Inc. v. Microsoft Corp., Garage. Rockland, MA Syngress Publishing. Copyright (c) 2005. ISBN",
+      "downloadLocation": "NOASSERTION",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:golang/github.com/ulikunitz/xz@v0.5.15",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "BSD-3-Clause",
+      "name": "github.com/ulikunitz/xz",
+      "versionInfo": "v0.5.15"
+    },
+    {
+      "SPDXID": "SPDXRef-golang-github.comzclconf-go-cty-v1.17.0-8f6be2",
+      "copyrightText": "Copyright (c) 2017-2018 Martin Atkins, Copyright 2017 Martin Atkins",
+      "downloadLocation": "NOASSERTION",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:golang/github.com/zclconf/go-cty@v1.17.0",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "MIT",
+      "name": "github.com/zclconf/go-cty",
+      "versionInfo": "v1.17.0"
+    },
+    {
+      "SPDXID": "SPDXRef-golang-golang.orgx-crypto-v0.59.0-385b19",
+      "downloadLocation": "NOASSERTION",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:golang/golang.org/x/crypto@v0.59.0",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "BSD-3-Clause",
+      "name": "golang.org/x/crypto",
+      "versionInfo": "v0.59.0"
+    },
+    {
+      "SPDXID": "SPDXRef-golang-golang.orgx-mod-v0.42.0-0febe0",
+      "downloadLocation": "NOASSERTION",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:golang/golang.org/x/mod@v0.42.0",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "BSD-3-Clause",
+      "name": "golang.org/x/mod",
+      "versionInfo": "v0.42.0"
+    },
+    {
+      "SPDXID": "SPDXRef-golang-golang.orgx-sync-v0.25.0-881cc5",
+      "downloadLocation": "NOASSERTION",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:golang/golang.org/x/sync@v0.25.0",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "BSD-3-Clause",
+      "name": "golang.org/x/sync",
+      "versionInfo": "v0.25.0"
+    },
+    {
+      "SPDXID": "SPDXRef-golang-golang.orgx-sys-v0.50.0-5d7cbb",
+      "downloadLocation": "NOASSERTION",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:golang/golang.org/x/sys@v0.50.0",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "BSD-3-Clause AND LicenseRef-scancode-google-patent-license-golang",
+      "name": "golang.org/x/sys",
+      "versionInfo": "v0.50.0"
+    },
+    {
+      "SPDXID": "SPDXRef-golang-golang.orgx-text-v0.44.0-42e521",
+      "downloadLocation": "NOASSERTION",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:golang/golang.org/x/text@v0.44.0",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "BSD-3-Clause",
+      "name": "golang.org/x/text",
+      "versionInfo": "v0.44.0"
+    },
+    {
+      "SPDXID": "SPDXRef-golang-golang.orgx-tools-v0.52.0-d3f17e",
+      "downloadLocation": "NOASSERTION",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:golang/golang.org/x/tools@v0.52.0",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "BSD-3-Clause AND LicenseRef-scancode-google-patent-license-golang",
+      "name": "golang.org/x/tools",
+      "versionInfo": "v0.52.0"
+    },
+    {
+      "SPDXID": "SPDXRef-golang-gopkg.in-yaml.v3-v3.0.1-46d3a6",
+      "copyrightText": "Copyright (c) 2006-2010 Kirill Simonov, Copyright (c) 2006-2011 Kirill Simonov, Copyright (c) 2011-2019 Canonical Ltd, Copyright 2011-2016 Canonical Ltd.",
+      "downloadLocation": "NOASSERTION",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:golang/gopkg.in/yaml.v3@v3.0.1",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "Apache-2.0",
+      "name": "gopkg.in/yaml.v3",
+      "versionInfo": "v3.0.1"
+    }
+  ],
+  "relationships": [
+    {
+      "relatedSpdxElement": "SPDXRef-github-pbs-common-terraform-aws-lambda-permission-module-main-ed1550",
+      "relationshipType": "DESCRIBES",
+      "spdxElementId": "SPDXRef-DOCUMENT"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-githubactions-actions-checkout-main-014c9c",
+      "relationshipType": "DEPENDS_ON",
+      "spdxElementId": "SPDXRef-github-pbs-common-terraform-aws-lambda-permission-module-main-ed1550"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-githubactions-dependabot-fetch-metadata-3..-5fcaf7",
+      "relationshipType": "DEPENDS_ON",
+      "spdxElementId": "SPDXRef-github-pbs-common-terraform-aws-lambda-permission-module-main-ed1550"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-githubactions-jdx-mise-action-5.2.4-8bff78",
+      "relationshipType": "DEPENDS_ON",
+      "spdxElementId": "SPDXRef-github-pbs-common-terraform-aws-lambda-permission-module-main-ed1550"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-golang-github.comgruntwork-io-terratest-v1.0.1-3eb16b",
+      "relationshipType": "DEPENDS_ON",
+      "spdxElementId": "SPDXRef-github-pbs-common-terraform-aws-lambda-permission-module-main-ed1550"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-golang-github.comagext-levenshtein-v1.2.3-d1a7b2",
+      "relationshipType": "DEPENDS_ON",
+      "spdxElementId": "SPDXRef-golang-github.comgruntwork-io-terratest-v1.0.1-3eb16b"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-golang-github.comapparentlymartgo-textseg-v15-v15.0.0-d3006a",
+      "relationshipType": "DEPENDS_ON",
+      "spdxElementId": "SPDXRef-golang-github.comgruntwork-io-terratest-v1.0.1-3eb16b"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-golang-github.combgentry-go-netrc-v0.0.0-20140422174119-9fd32a8b3d3d-3851a6",
+      "relationshipType": "DEPENDS_ON",
+      "spdxElementId": "SPDXRef-golang-github.comgruntwork-io-terratest-v1.0.1-3eb16b"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-golang-github.comdavecgh-go-spew-v1.1.2-0.20180830191138-d8f796af33cc-bbe3b3",
+      "relationshipType": "DEPENDS_ON",
+      "spdxElementId": "SPDXRef-golang-github.comgruntwork-io-terratest-v1.0.1-3eb16b"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-golang-github.comhashicorp-errwrap-v1.1.0-ed4ce8",
+      "relationshipType": "DEPENDS_ON",
+      "spdxElementId": "SPDXRef-golang-github.comgruntwork-io-terratest-v1.0.1-3eb16b"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-golang-github.comhashicorp-go-cleanhttp-v0.5.2-2a46b7",
+      "relationshipType": "DEPENDS_ON",
+      "spdxElementId": "SPDXRef-golang-github.comgruntwork-io-terratest-v1.0.1-3eb16b"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-golang-github.comhashicorp-go-multierror-v1.1.1-ebac25",
+      "relationshipType": "DEPENDS_ON",
+      "spdxElementId": "SPDXRef-golang-github.comgruntwork-io-terratest-v1.0.1-3eb16b"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-golang-github.comhashicorp-go-safetemp-v1.0.0-c95dc3",
+      "relationshipType": "DEPENDS_ON",
+      "spdxElementId": "SPDXRef-golang-github.comgruntwork-io-terratest-v1.0.1-3eb16b"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-golang-github.comhashicorp-go-version-v1.7.0-515ace",
+      "relationshipType": "DEPENDS_ON",
+      "spdxElementId": "SPDXRef-golang-github.comgruntwork-io-terratest-v1.0.1-3eb16b"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-golang-github.comhashicorp-terraform-json-v0.27.2-7fe0a1",
+      "relationshipType": "DEPENDS_ON",
+      "spdxElementId": "SPDXRef-golang-github.comgruntwork-io-terratest-v1.0.1-3eb16b"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-golang-github.comhashicorpgo-getter-v2-v2.2.3-0e5810",
+      "relationshipType": "DEPENDS_ON",
+      "spdxElementId": "SPDXRef-golang-github.comgruntwork-io-terratest-v1.0.1-3eb16b"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-golang-github.comhashicorphcl-v2-v2.24.0-672798",
+      "relationshipType": "DEPENDS_ON",
+      "spdxElementId": "SPDXRef-golang-github.comgruntwork-io-terratest-v1.0.1-3eb16b"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-golang-github.comjinzhu-copier-v0.4.0-cfe474",
+      "relationshipType": "DEPENDS_ON",
+      "spdxElementId": "SPDXRef-golang-github.comgruntwork-io-terratest-v1.0.1-3eb16b"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-golang-github.comklauspost-compress-v1.20.2-4fbfb2",
+      "relationshipType": "DEPENDS_ON",
+      "spdxElementId": "SPDXRef-golang-github.comgruntwork-io-terratest-v1.0.1-3eb16b"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-golang-github.commattn-go-zglob-v0.0.6-63c59e",
+      "relationshipType": "DEPENDS_ON",
+      "spdxElementId": "SPDXRef-golang-github.comgruntwork-io-terratest-v1.0.1-3eb16b"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-golang-github.commitchellh-go-homedir-v1.1.0-529d8e",
+      "relationshipType": "DEPENDS_ON",
+      "spdxElementId": "SPDXRef-golang-github.comgruntwork-io-terratest-v1.0.1-3eb16b"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-golang-github.commitchellh-go-testing-interface-v1.14.1-046cb5",
+      "relationshipType": "DEPENDS_ON",
+      "spdxElementId": "SPDXRef-golang-github.comgruntwork-io-terratest-v1.0.1-3eb16b"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-golang-github.commitchellh-go-wordwrap-v1.0.1-9e286a",
+      "relationshipType": "DEPENDS_ON",
+      "spdxElementId": "SPDXRef-golang-github.comgruntwork-io-terratest-v1.0.1-3eb16b"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-golang-github.compmezard-go-difflib-v1.0.1-0.20181226105442-5d4384ee4fb2-0454e9",
+      "relationshipType": "DEPENDS_ON",
+      "spdxElementId": "SPDXRef-golang-github.comgruntwork-io-terratest-v1.0.1-3eb16b"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-golang-github.comstretchr-testify-v1.11.1-0501a2",
+      "relationshipType": "DEPENDS_ON",
+      "spdxElementId": "SPDXRef-golang-github.comgruntwork-io-terratest-v1.0.1-3eb16b"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-golang-github.comtmccombs-hcl2json-v0.6.8-d2b188",
+      "relationshipType": "DEPENDS_ON",
+      "spdxElementId": "SPDXRef-golang-github.comgruntwork-io-terratest-v1.0.1-3eb16b"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-golang-github.comulikunitz-xz-v0.5.15-caee38",
+      "relationshipType": "DEPENDS_ON",
+      "spdxElementId": "SPDXRef-golang-github.comgruntwork-io-terratest-v1.0.1-3eb16b"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-golang-github.comzclconf-go-cty-v1.17.0-8f6be2",
+      "relationshipType": "DEPENDS_ON",
+      "spdxElementId": "SPDXRef-golang-github.comgruntwork-io-terratest-v1.0.1-3eb16b"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-golang-golang.orgx-crypto-v0.59.0-385b19",
+      "relationshipType": "DEPENDS_ON",
+      "spdxElementId": "SPDXRef-golang-github.comgruntwork-io-terratest-v1.0.1-3eb16b"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-golang-golang.orgx-mod-v0.42.0-0febe0",
+      "relationshipType": "DEPENDS_ON",
+      "spdxElementId": "SPDXRef-golang-github.comgruntwork-io-terratest-v1.0.1-3eb16b"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-golang-golang.orgx-sync-v0.25.0-881cc5",
+      "relationshipType": "DEPENDS_ON",
+      "spdxElementId": "SPDXRef-golang-github.comgruntwork-io-terratest-v1.0.1-3eb16b"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-golang-golang.orgx-sys-v0.50.0-5d7cbb",
+      "relationshipType": "DEPENDS_ON",
+      "spdxElementId": "SPDXRef-golang-github.comgruntwork-io-terratest-v1.0.1-3eb16b"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-golang-golang.orgx-text-v0.44.0-42e521",
+      "relationshipType": "DEPENDS_ON",
+      "spdxElementId": "SPDXRef-golang-github.comgruntwork-io-terratest-v1.0.1-3eb16b"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-golang-golang.orgx-tools-v0.52.0-d3f17e",
+      "relationshipType": "DEPENDS_ON",
+      "spdxElementId": "SPDXRef-golang-github.comgruntwork-io-terratest-v1.0.1-3eb16b"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-golang-gopkg.in-yaml.v3-v3.0.1-46d3a6",
+      "relationshipType": "DEPENDS_ON",
+      "spdxElementId": "SPDXRef-golang-github.comgruntwork-io-terratest-v1.0.1-3eb16b"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-golang-github.comhashicorp-errwrap-v1.1.0-ed4ce8",
+      "relationshipType": "DEPENDS_ON",
+      "spdxElementId": "SPDXRef-golang-github.comhashicorp-go-multierror-v1.1.1-ebac25"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-golang-github.comapparentlymartgo-textseg-v15-v15.0.0-d3006a",
+      "relationshipType": "DEPENDS_ON",
+      "spdxElementId": "SPDXRef-golang-github.comhashicorp-terraform-json-v0.27.2-7fe0a1"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-golang-github.comdavecgh-go-spew-v1.1.2-0.20180830191138-d8f796af33cc-bbe3b3",
+      "relationshipType": "DEPENDS_ON",
+      "spdxElementId": "SPDXRef-golang-github.comhashicorp-terraform-json-v0.27.2-7fe0a1"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-golang-github.comhashicorp-go-version-v1.7.0-515ace",
+      "relationshipType": "DEPENDS_ON",
+      "spdxElementId": "SPDXRef-golang-github.comhashicorp-terraform-json-v0.27.2-7fe0a1"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-golang-github.comzclconf-go-cty-v1.17.0-8f6be2",
+      "relationshipType": "DEPENDS_ON",
+      "spdxElementId": "SPDXRef-golang-github.comhashicorp-terraform-json-v0.27.2-7fe0a1"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-golang-golang.orgx-text-v0.44.0-42e521",
+      "relationshipType": "DEPENDS_ON",
+      "spdxElementId": "SPDXRef-golang-github.comhashicorp-terraform-json-v0.27.2-7fe0a1"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-golang-github.combgentry-go-netrc-v0.0.0-20140422174119-9fd32a8b3d3d-3851a6",
+      "relationshipType": "DEPENDS_ON",
+      "spdxElementId": "SPDXRef-golang-github.comhashicorpgo-getter-v2-v2.2.3-0e5810"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-golang-github.comhashicorp-errwrap-v1.1.0-ed4ce8",
+      "relationshipType": "DEPENDS_ON",
+      "spdxElementId": "SPDXRef-golang-github.comhashicorpgo-getter-v2-v2.2.3-0e5810"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-golang-github.comhashicorp-go-cleanhttp-v0.5.2-2a46b7",
+      "relationshipType": "DEPENDS_ON",
+      "spdxElementId": "SPDXRef-golang-github.comhashicorpgo-getter-v2-v2.2.3-0e5810"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-golang-github.comhashicorp-go-multierror-v1.1.1-ebac25",
+      "relationshipType": "DEPENDS_ON",
+      "spdxElementId": "SPDXRef-golang-github.comhashicorpgo-getter-v2-v2.2.3-0e5810"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-golang-github.comhashicorp-go-safetemp-v1.0.0-c95dc3",
+      "relationshipType": "DEPENDS_ON",
+      "spdxElementId": "SPDXRef-golang-github.comhashicorpgo-getter-v2-v2.2.3-0e5810"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-golang-github.comhashicorp-go-version-v1.7.0-515ace",
+      "relationshipType": "DEPENDS_ON",
+      "spdxElementId": "SPDXRef-golang-github.comhashicorpgo-getter-v2-v2.2.3-0e5810"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-golang-github.comklauspost-compress-v1.20.2-4fbfb2",
+      "relationshipType": "DEPENDS_ON",
+      "spdxElementId": "SPDXRef-golang-github.comhashicorpgo-getter-v2-v2.2.3-0e5810"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-golang-github.commitchellh-go-homedir-v1.1.0-529d8e",
+      "relationshipType": "DEPENDS_ON",
+      "spdxElementId": "SPDXRef-golang-github.comhashicorpgo-getter-v2-v2.2.3-0e5810"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-golang-github.commitchellh-go-testing-interface-v1.14.1-046cb5",
+      "relationshipType": "DEPENDS_ON",
+      "spdxElementId": "SPDXRef-golang-github.comhashicorpgo-getter-v2-v2.2.3-0e5810"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-golang-github.comulikunitz-xz-v0.5.15-caee38",
+      "relationshipType": "DEPENDS_ON",
+      "spdxElementId": "SPDXRef-golang-github.comhashicorpgo-getter-v2-v2.2.3-0e5810"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-golang-github.comagext-levenshtein-v1.2.3-d1a7b2",
+      "relationshipType": "DEPENDS_ON",
+      "spdxElementId": "SPDXRef-golang-github.comhashicorphcl-v2-v2.24.0-672798"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-golang-github.comapparentlymartgo-textseg-v15-v15.0.0-d3006a",
+      "relationshipType": "DEPENDS_ON",
+      "spdxElementId": "SPDXRef-golang-github.comhashicorphcl-v2-v2.24.0-672798"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-golang-github.comdavecgh-go-spew-v1.1.2-0.20180830191138-d8f796af33cc-bbe3b3",
+      "relationshipType": "DEPENDS_ON",
+      "spdxElementId": "SPDXRef-golang-github.comhashicorphcl-v2-v2.24.0-672798"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-golang-github.commitchellh-go-wordwrap-v1.0.1-9e286a",
+      "relationshipType": "DEPENDS_ON",
+      "spdxElementId": "SPDXRef-golang-github.comhashicorphcl-v2-v2.24.0-672798"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-golang-github.comzclconf-go-cty-v1.17.0-8f6be2",
+      "relationshipType": "DEPENDS_ON",
+      "spdxElementId": "SPDXRef-golang-github.comhashicorphcl-v2-v2.24.0-672798"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-golang-golang.orgx-crypto-v0.59.0-385b19",
+      "relationshipType": "DEPENDS_ON",
+      "spdxElementId": "SPDXRef-golang-github.comhashicorphcl-v2-v2.24.0-672798"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-golang-golang.orgx-mod-v0.42.0-0febe0",
+      "relationshipType": "DEPENDS_ON",
+      "spdxElementId": "SPDXRef-golang-github.comhashicorphcl-v2-v2.24.0-672798"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-golang-golang.orgx-sync-v0.25.0-881cc5",
+      "relationshipType": "DEPENDS_ON",
+      "spdxElementId": "SPDXRef-golang-github.comhashicorphcl-v2-v2.24.0-672798"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-golang-golang.orgx-sys-v0.50.0-5d7cbb",
+      "relationshipType": "DEPENDS_ON",
+      "spdxElementId": "SPDXRef-golang-github.comhashicorphcl-v2-v2.24.0-672798"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-golang-golang.orgx-text-v0.44.0-42e521",
+      "relationshipType": "DEPENDS_ON",
+      "spdxElementId": "SPDXRef-golang-github.comhashicorphcl-v2-v2.24.0-672798"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-golang-golang.orgx-tools-v0.52.0-d3f17e",
+      "relationshipType": "DEPENDS_ON",
+      "spdxElementId": "SPDXRef-golang-github.comhashicorphcl-v2-v2.24.0-672798"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-golang-github.comdavecgh-go-spew-v1.1.2-0.20180830191138-d8f796af33cc-bbe3b3",
+      "relationshipType": "DEPENDS_ON",
+      "spdxElementId": "SPDXRef-golang-github.comstretchr-testify-v1.11.1-0501a2"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-golang-github.compmezard-go-difflib-v1.0.1-0.20181226105442-5d4384ee4fb2-0454e9",
+      "relationshipType": "DEPENDS_ON",
+      "spdxElementId": "SPDXRef-golang-github.comstretchr-testify-v1.11.1-0501a2"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-golang-gopkg.in-yaml.v3-v3.0.1-46d3a6",
+      "relationshipType": "DEPENDS_ON",
+      "spdxElementId": "SPDXRef-golang-github.comstretchr-testify-v1.11.1-0501a2"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-golang-github.comagext-levenshtein-v1.2.3-d1a7b2",
+      "relationshipType": "DEPENDS_ON",
+      "spdxElementId": "SPDXRef-golang-github.comtmccombs-hcl2json-v0.6.8-d2b188"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-golang-github.comapparentlymartgo-textseg-v15-v15.0.0-d3006a",
+      "relationshipType": "DEPENDS_ON",
+      "spdxElementId": "SPDXRef-golang-github.comtmccombs-hcl2json-v0.6.8-d2b188"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-golang-github.comhashicorphcl-v2-v2.24.0-672798",
+      "relationshipType": "DEPENDS_ON",
+      "spdxElementId": "SPDXRef-golang-github.comtmccombs-hcl2json-v0.6.8-d2b188"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-golang-github.commitchellh-go-wordwrap-v1.0.1-9e286a",
+      "relationshipType": "DEPENDS_ON",
+      "spdxElementId": "SPDXRef-golang-github.comtmccombs-hcl2json-v0.6.8-d2b188"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-golang-github.comzclconf-go-cty-v1.17.0-8f6be2",
+      "relationshipType": "DEPENDS_ON",
+      "spdxElementId": "SPDXRef-golang-github.comtmccombs-hcl2json-v0.6.8-d2b188"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-golang-golang.orgx-mod-v0.42.0-0febe0",
+      "relationshipType": "DEPENDS_ON",
+      "spdxElementId": "SPDXRef-golang-github.comtmccombs-hcl2json-v0.6.8-d2b188"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-golang-golang.orgx-sync-v0.25.0-881cc5",
+      "relationshipType": "DEPENDS_ON",
+      "spdxElementId": "SPDXRef-golang-github.comtmccombs-hcl2json-v0.6.8-d2b188"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-golang-golang.orgx-text-v0.44.0-42e521",
+      "relationshipType": "DEPENDS_ON",
+      "spdxElementId": "SPDXRef-golang-github.comtmccombs-hcl2json-v0.6.8-d2b188"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-golang-golang.orgx-tools-v0.52.0-d3f17e",
+      "relationshipType": "DEPENDS_ON",
+      "spdxElementId": "SPDXRef-golang-github.comtmccombs-hcl2json-v0.6.8-d2b188"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-golang-github.comapparentlymartgo-textseg-v15-v15.0.0-d3006a",
+      "relationshipType": "DEPENDS_ON",
+      "spdxElementId": "SPDXRef-golang-github.comzclconf-go-cty-v1.17.0-8f6be2"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-golang-github.comdavecgh-go-spew-v1.1.2-0.20180830191138-d8f796af33cc-bbe3b3",
+      "relationshipType": "DEPENDS_ON",
+      "spdxElementId": "SPDXRef-golang-github.comzclconf-go-cty-v1.17.0-8f6be2"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-golang-golang.orgx-text-v0.44.0-42e521",
+      "relationshipType": "DEPENDS_ON",
+      "spdxElementId": "SPDXRef-golang-github.comzclconf-go-cty-v1.17.0-8f6be2"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-golang-golang.orgx-sys-v0.50.0-5d7cbb",
+      "relationshipType": "DEPENDS_ON",
+      "spdxElementId": "SPDXRef-golang-golang.orgx-crypto-v0.59.0-385b19"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-golang-golang.orgx-text-v0.44.0-42e521",
+      "relationshipType": "DEPENDS_ON",
+      "spdxElementId": "SPDXRef-golang-golang.orgx-crypto-v0.59.0-385b19"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-golang-golang.orgx-tools-v0.52.0-d3f17e",
+      "relationshipType": "DEPENDS_ON",
+      "spdxElementId": "SPDXRef-golang-golang.orgx-mod-v0.42.0-0febe0"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-golang-golang.orgx-mod-v0.42.0-0febe0",
+      "relationshipType": "DEPENDS_ON",
+      "spdxElementId": "SPDXRef-golang-golang.orgx-text-v0.44.0-42e521"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-golang-golang.orgx-sync-v0.25.0-881cc5",
+      "relationshipType": "DEPENDS_ON",
+      "spdxElementId": "SPDXRef-golang-golang.orgx-text-v0.44.0-42e521"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-golang-golang.orgx-tools-v0.52.0-d3f17e",
+      "relationshipType": "DEPENDS_ON",
+      "spdxElementId": "SPDXRef-golang-golang.orgx-text-v0.44.0-42e521"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-golang-golang.orgx-mod-v0.42.0-0febe0",
+      "relationshipType": "DEPENDS_ON",
+      "spdxElementId": "SPDXRef-golang-golang.orgx-tools-v0.52.0-d3f17e"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-golang-golang.orgx-sync-v0.25.0-881cc5",
+      "relationshipType": "DEPENDS_ON",
+      "spdxElementId": "SPDXRef-golang-golang.orgx-tools-v0.52.0-d3f17e"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-golang-golang.orgx-sys-v0.50.0-5d7cbb",
+      "relationshipType": "DEPENDS_ON",
+      "spdxElementId": "SPDXRef-golang-golang.orgx-tools-v0.52.0-d3f17e"
+    }
+  ],
+  "spdxVersion": "SPDX-2.3"
+}
